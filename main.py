@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware # 追加
 
+from src.gemini import get_answer_from_gemini
 
 app = FastAPI()
 
@@ -22,6 +23,9 @@ def read_root():
 
 @app.post("/api/answer")
 def answer(req: AnswerRequest):
-    text = req.text
 
-    return {"answer": f'「{req.text}」にお答えします！'}
+	text = req.text
+	# Gemini APIを呼び出して回答を取得
+	answer = get_answer_from_gemini(text)
+     
+	return {"answer": answer}
