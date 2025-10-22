@@ -22,4 +22,6 @@ def read_root():
 
 @app.post("/api/answer")
 def answer(req: AnswerRequest):
-    return {"text": req.text}
+    text = req.text
+
+    return {"text": f'「{req.text}」にお答えします！'}
