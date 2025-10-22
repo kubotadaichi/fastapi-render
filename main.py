@@ -24,4 +24,4 @@ def read_root():
 def answer(req: AnswerRequest):
     text = req.text
 
-    return {"text": f'「{req.text}」にお答えします！'}
+    return {"answer": f'「{req.text}」にお答えします！'}
