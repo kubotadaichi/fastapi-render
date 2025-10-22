@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAP
+from pydantic import BaseModelI
 from starlette.middleware.cors import CORSMiddleware # 追加
 
 
@@ -12,10 +13,13 @@ app.add_middleware(
     allow_headers=["*"]       # 追記により追加
 )
 
+class AnswerRequest(BaseModel):
+    text: str
+
 @app.get("/")
 def read_root():
-	return {"message" : "Hello, Render!"}
+    return {"message": "Hello, Render!"}
 
 @app.post("/api/answer")
-def answer(text: str):
-	return {"text": text}
+def answer(req: AnswerRequest):
+    return {"text": req.text}
