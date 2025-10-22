@@ -1,5 +1,5 @@
-from fastapi import FastAP
-from pydantic import BaseModelI
+from fastapi import FastAPI
+from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware # 追加
 
 
