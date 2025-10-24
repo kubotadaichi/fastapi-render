@@ -26,6 +26,9 @@ def answer(req: AnswerRequest):
 
 	text = req.text
 	# Gemini APIを呼び出して回答を取得
-	answer = get_answer_from_gemini(text)
+	answer, url = get_answer_from_gemini(text)
      
-	return {"answer": answer}
+	return {
+          "answer": answer,
+          "video_url": url
+          }
