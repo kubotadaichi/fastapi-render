@@ -6,7 +6,7 @@ import base64
 from mutagen.mp3 import MP3
 
 from src.gemini import get_answer_from_gemini
-from audio.fishaudio import generate_tts_to_bytes
+from audio.fishaudio import generate_tts
 
 app = FastAPI()
 
@@ -45,7 +45,7 @@ def answer(req: AnswerRequest):
     if req.include_audio:
         try:
             # 音声を生成
-            audio_data = generate_tts_to_bytes(answer, speed=speed)
+            audio_data = generate_tts(answer, speed=speed)
             
             if audio_data:
                 # Base64エンコード

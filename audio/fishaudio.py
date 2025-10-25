@@ -40,11 +40,14 @@ def clone_voice():
 
     return model.id
 
-def generate_tts(text, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
+def generate_tts(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
     # Use the model
     request = TTSRequest(
         text=text,
         reference_id=model_id,
+        prosody=Prosody(
+            speed=speed,  # 1.2倍速（0.5-2.0の範囲）
+        )
     )
 
     try:
