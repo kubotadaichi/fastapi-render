@@ -1,6 +1,8 @@
 import os
 import requests
 from fish_audio_sdk import Session, TTSRequest, ReferenceAudio
+from fish_audio_sdk import Prosody
+
 
 from dotenv import load_dotenv
 
@@ -57,13 +59,16 @@ def generate_tts(text, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
         else:
             print(f"Error generating TTS: {e}")
 
-def generate_tts_to_bytes(text, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
+def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
     """
     音声を生成してバイト形式で返す関数
     """
     request = TTSRequest(
         text=text,
         reference_id=model_id,
+        prosody=Prosody(
+            speed=speed,  # 1.2倍速（0.5-2.0の範囲）
+    )
     )
 
     try:

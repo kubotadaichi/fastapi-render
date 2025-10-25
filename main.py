@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware # 追加
 import base64
 
+from mutagen.mp3 import MP3
+
 from src.gemini import get_answer_from_gemini
 from audio.fishaudio import generate_tts_to_bytes
 
@@ -19,6 +21,7 @@ app.add_middleware(
 class AnswerRequest(BaseModel):
     text: str
     include_audio: bool = False  # 音声を含めるかどうかのフラグ
+    speed: float = 1.0  # 音声速度のパラメータ
 
 @app.get("/")
 def read_root():
@@ -29,6 +32,8 @@ def answer(req: AnswerRequest):
     text = req.text
     # Gemini APIを呼び出して回答を取得
     answer, url, start_time = get_answer_from_gemini(text)
+
+    speed = req.speed
     
     response = {
         "answer": answer,
@@ -40,15 +45,19 @@ def answer(req: AnswerRequest):
     if req.include_audio:
         try:
             # 音声を生成
-            audio_data = generate_tts_to_bytes(answer)
+            audio_data = generate_tts_to_bytes(answer, speed=speed)
             
             if audio_data:
                 # Base64エンコード
+                audio = MP3(r"cloned_voice.mp3")
+                length = audio.info.length
                 audio_base64 = base64.b64encode(audio_data).decode('utf-8')
                 response["audio"] = {
                     "data": audio_base64,
                     "format": "mp3",
-                    "mime_type": "audio/mpeg"
+                    "mime_type": "audio/mpeg",
+                    "length": length * 1000,  # ミリ秒単位
+                    # "x" : length / len(answer) 
                 }
             
         except Exception as e:
