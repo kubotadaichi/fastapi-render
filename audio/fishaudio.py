@@ -79,6 +79,9 @@ def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab8
         for chunk in session.tts(request):
             audio_data += chunk
         print("Successfully generated audio data")
+        with open("cloned_voice.mp3", "wb") as f:
+            for chunk in session.tts(request):
+                f.write(chunk)
         return audio_data
     except Exception as e:
         if "402" in str(e) or "Payment Required" in str(e):

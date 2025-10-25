@@ -6,7 +6,7 @@ import base64
 from mutagen.mp3 import MP3
 
 from src.gemini import get_answer_from_gemini
-from audio.fishaudio import generate_tts
+from audio.fishaudio import generate_tts_to_bytes
 
 app = FastAPI()
 
@@ -45,10 +45,8 @@ def answer(req: AnswerRequest):
     if req.include_audio:
         try:
             # 音声を生成
-            audio_data = generate_tts(answer, speed=speed)
+            audio_data = generate_tts_to_bytes(answer, speed=speed)
             
-            audio_data = True
-
             if audio_data:
                 # Base64エンコード
                 audio = MP3(r"cloned_voice.mp3")
@@ -58,8 +56,7 @@ def answer(req: AnswerRequest):
                     "data": audio_base64,
                     "format": "mp3",
                     "mime_type": "audio/mpeg",
-                    "length": length * 1000,  # ミリ秒単位
-                    # "x" : length / len(answer) 
+                    "length": length * 1000  # ミリ秒単位
                 }
             
         except Exception as e:
