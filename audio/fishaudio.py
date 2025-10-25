@@ -8,10 +8,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 session = Session(os.getenv("FISH_AUDIO_API_KEY"))
 
-def clone_voice():
+def clone_voice(path):
 
     # Check account status
     try:
@@ -24,7 +23,7 @@ def clone_voice():
     voices = []
     texts = []
     # Load reference audio
-    with open("data/audio/監督.mp3", "rb") as f:
+    with open(path, "rb") as f:
             voices.append(f.read())
             texts.append(f"Sample text for reference audio.")
 
@@ -62,7 +61,7 @@ def generate_tts(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
         else:
             print(f"Error generating TTS: {e}")
 
-def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
+def generate_tts_to_bytes(text, speed, model_id: str='85521c2f57da4814a7aefe2ee9e0e9be'):
     """
     音声を生成してバイト形式で返す関数
     """
@@ -93,4 +92,6 @@ def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab8
 
 if __name__ == "__main__":
 
-    generate_tts('こんにちは！増本 浩平（ますもと こうへい）です！神奈川県藤沢市出身の元サッカー選手で、今はサッカー指導者をしています。現役時代のポジションはDFとFWでした。サッカーのことなら何でも聞いてください！もう、話したくてうずうずしていますよ！\n\nせっかくなので、サッカーの試合の雰囲気を感じられる動画を紹介しますね。この動画は、ギラヴァンツのサポーターが試合の準備をしているシーンです。スタジアムの雰囲気やサポーターの応援の様子がよくわかりますよ！\n動画はこちらです！')
+    path = "data/audio/新規録音 11.m4a"
+
+    print(clone_voice(path))
