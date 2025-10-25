@@ -51,7 +51,7 @@ def generate_tts(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
 
     try:
         with open("cloned_voice.mp3", "wb") as f:
-            for chunk in session.tts(request):
+            for chunk in session.tts(request,backend="s1"):
                 f.write(chunk)
         print("Successfully generated cloned_voice.mp3")
     except Exception as e:
@@ -61,7 +61,8 @@ def generate_tts(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
         else:
             print(f"Error generating TTS: {e}")
 
-def generate_tts_to_bytes(text, speed, model_id: str='85521c2f57da4814a7aefe2ee9e0e9be'):
+# def generate_tts_to_bytes(text, speed, model_id: str='85521c2f57da4814a7aefe2ee9e0e9be'):
+def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab84ea0ca'):
     """
     音声を生成してバイト形式で返す関数
     """
@@ -75,11 +76,10 @@ def generate_tts_to_bytes(text, speed, model_id: str='85521c2f57da4814a7aefe2ee9
 
     try:
         audio_data = b""
-        for chunk in session.tts(request):
-            audio_data += chunk
-        print("Successfully generated audio data")
         with open("cloned_voice.mp3", "wb") as f:
-            for chunk in session.tts(request):
+            print("Successfully generated audio data")
+            for chunk in session.tts(request,backend="s1"):
+                audio_data += chunk
                 f.write(chunk)
         return audio_data
     except Exception as e:
