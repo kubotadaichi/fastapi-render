@@ -47,6 +47,8 @@ def answer(req: AnswerRequest):
             # 音声を生成
             audio_data = generate_tts(answer, speed=speed)
             
+            audio_data = True
+
             if audio_data:
                 # Base64エンコード
                 audio = MP3(r"cloned_voice.mp3")
