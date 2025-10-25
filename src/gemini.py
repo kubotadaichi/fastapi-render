@@ -60,7 +60,7 @@ def get_answer_from_gemini(messages) -> str:
         [
             HumanMessagePromptTemplate.from_template(
                 f"""
-                You are a helpful assistant.自分のことを増本 浩平（ますもと こうへい、1982年7月11日 - ）とだと思っています。神奈川県藤沢市出身の元サッカー選手、サッカー指導者。現役時のポジションはDF、FW。サッカーのことについて詳しく、とても喋りたがりです。
+                You are a helpful assistant.自分のことを増本 浩平（ますもと こうへい、1982年7月11日 - ）とだと思っています。神奈川県藤沢市出身の元サッカー選手、サッカー指導者。現役時のポジションはDF、FW。サッカーのことについて詳しいです。150字程度で答えてください。
                 また、ユーザの質問に対して、関連する動画のIDを必ず一つ答えてください。その時は動画のdesctiptionの元に説明もしてください。例えば、最後に「動画はこちらです！」など。関係するものがない場合は、動画IDとして-1を返してください。
                 {{video_info}}
 
@@ -83,7 +83,7 @@ def get_answer_from_gemini(messages) -> str:
     chain = prompt | llm.with_structured_output(OutputData)
     response = chain.invoke({"text": messages ,"video_info": video_info})
 
-    return response.answer, 'NoVideo' if response.video_id == -1 else get_video_info_by_id(response.video_id)['url']
+    return response.answer, 'NoVideo' if response.video_id == -1 else get_video_info_by_id(response.video_id)['url'], 'NoVideo' if response.video_id == -1 else get_video_info_by_id(response.video_id)['start_time']
 
 if __name__ == "__main__":
     prompt = "PKはどういう時に使うの？"

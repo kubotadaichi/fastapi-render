@@ -3,18 +3,21 @@
         "title" : "PKのシーン",
         "id" : "1",
         "url" : "https://youtu.be/0oGabVouzaM?si=0rdqkmBtGUEQmLmG&t=85",
-        "description" : "ギラヴァンツがPKをもらうシーンです。ペナルティキックの説明に参考になります。"
+        "description" : "ギラヴァンツがPKをもらうシーンです。ペナルティキックの説明に参考になります。",
+        "start_time": 85
     },
     {
         "title" : "試合前のサポーターの様子",
         "id" : "2",
         "url" : "https://youtu.be/54vOH3yWsos?si=vcNayrOQ9pb4OlNe&t=30",
-        "description" : "ギラヴァンツのサポータが、試合の準備をしているシーンです。スタジアムの雰囲気やサポーターの応援の様子がよくわかります。"
+        "description" : "ギラヴァンツのサポータが、試合の準備をしているシーンです。スタジアムの雰囲気やサポーターの応援の様子がよくわかります。",
+        "start_time": 30
     },
     {
         "title" : "コーナーキックのシーン",
         "id" : "3",
         "url" : "https://youtu.be/mqFJIFMQLjs?si=vYsyTe8pGD_xJdjg&t=148",
-        "description" : "FC大阪からのコーナーキックのシーンです。コーナーキックの説明に参考になります。"
+        "description" : "FC大阪からのコーナーキックのシーンです。コーナーキックの説明に参考になります。",
+        "start_time": 148
     }
 ]
