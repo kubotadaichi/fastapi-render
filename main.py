@@ -45,6 +45,9 @@ def answer(req: AnswerRequest):
         elif req.actor == 'kubota':
             speed = 1.0  # 例えば、1.2倍速に設定
             model_id = 'c906b79a1bd740f2897e4311eb58d203'
+        elif req.actor == 'dori':
+            speed = 1.0  # 例えば、1.2倍速に設定
+            model_id = 'e143eae381414aeaa0f2a29dc8b5c9f2'
 
     response = {
         "answer": answer,

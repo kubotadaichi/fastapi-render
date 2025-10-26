@@ -92,7 +92,7 @@ def generate_tts_to_bytes(text, speed, model_id: str='d5219abbc7f048a085bf85aab8
 
 if __name__ == "__main__":
 
-    path = "data/audio/新規録音 11.m4a"
+    path = "data/audio/ドリー.mp3"
 
-    # path = "data/audio/監督.mp3"
+    # path = "data/.mp3"audio/監督.mp3"
     print(clone_voice(path))
