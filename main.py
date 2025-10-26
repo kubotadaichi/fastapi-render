@@ -22,6 +22,7 @@ class AnswerRequest(BaseModel):
     text: str
     include_audio: bool = False  # 音声を含めるかどうかのフラグ
     speed: float = 1.0  # 音声速度のパラメータ
+    actor: str = 'masumoto'  # 音声アクターのパラメータ（デフォルト: masumoto）
 
 @app.get("/")
 def read_root():
@@ -34,20 +35,21 @@ def answer(req: AnswerRequest):
     answer, url, start_time, feeling_id = get_answer_from_gemini(text)
 
     speed = req.speed
+    actor = req.actor
+    
+    print(f"Received request - actor: {actor}, speed: {speed}")
 
-    model_id = 'd5219abbc7f048a085bf85aab84ea0ca'
-
-    if hasattr(req, 'actor'):
-        if req.actor == 'masumoto':
-            speed = 1.0  # 例えば、1.2倍速に設定
-            model_id = '7649fdd17d9344648375343b203120f5'
-            
-        elif req.actor == 'kubota':
-            speed = 1.0  # 例えば、1.2倍速に設定
-            model_id = 'c906b79a1bd740f2897e4311eb58d203'
-        elif req.actor == 'dori':
-            speed = 1.0  # 例えば、1.2倍速に設定
-            model_id = 'e143eae381414aeaa0f2a29dc8b5c9f2'
+    # アクターに応じてmodel_idを設定
+    if actor == 'masumoto':
+        model_id = '7649fdd17d9344648375343b203120f5'
+    elif actor == 'kubota':
+        model_id = 'c906b79a1bd740f2897e4311eb58d203'
+    elif actor == 'dori':
+        model_id = 'e143eae381414aeaa0f2a29dc8b5c9f2'
+    else:
+        model_id = '7649fdd17d9344648375343b203120f5'  # デフォルト: masumoto
+    
+    print(f"Selected model_id: {model_id} for actor: {actor}")
 
     response = {
         "answer": answer,
