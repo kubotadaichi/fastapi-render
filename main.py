@@ -31,21 +31,33 @@ def read_root():
 def answer(req: AnswerRequest):
     text = req.text
     # Gemini APIを呼び出して回答を取得
-    answer, url, start_time = get_answer_from_gemini(text)
+    answer, url, start_time, feeling_id = get_answer_from_gemini(text)
 
     speed = req.speed
-    
+
+    model_id = 'd5219abbc7f048a085bf85aab84ea0ca'
+
+    if hasattr(req, 'actor'):
+        if req.actor == 'masumoto':
+            speed = 1.0  # 例えば、1.2倍速に設定
+            model_id = 'd5219abbc7f048a085bf85aab84ea0ca'
+            
+        elif req.actor == 'kubota':
+            speed = 1.0  # 例えば、1.2倍速に設定
+            model_id = '85521c2f57da4814a7aefe2ee9e0e9be'
+
     response = {
         "answer": answer,
         "video_url": url,
-        "start_time": start_time
+        "start_time": start_time,
+        "feeling_id": feeling_id
     }
     
     # 音声生成が要求された場合
     if req.include_audio:
         try:
             # 音声を生成
-            audio_data = generate_tts_to_bytes(answer, speed=speed)
+            audio_data = generate_tts_to_bytes(answer, speed=speed, model_id=model_id)
             
             if audio_data:
                 # Base64エンコード
