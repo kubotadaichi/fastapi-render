@@ -94,4 +94,5 @@ if __name__ == "__main__":
 
     path = "data/audio/新規録音 11.m4a"
 
+    # path = "data/audio/監督.mp3"
     print(clone_voice(path))

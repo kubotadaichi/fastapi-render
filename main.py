@@ -40,11 +40,11 @@ def answer(req: AnswerRequest):
     if hasattr(req, 'actor'):
         if req.actor == 'masumoto':
             speed = 1.0  # 例えば、1.2倍速に設定
-            model_id = 'd5219abbc7f048a085bf85aab84ea0ca'
+            model_id = '7649fdd17d9344648375343b203120f5'
             
         elif req.actor == 'kubota':
             speed = 1.0  # 例えば、1.2倍速に設定
-            model_id = '85521c2f57da4814a7aefe2ee9e0e9be'
+            model_id = 'c906b79a1bd740f2897e4311eb58d203'
 
     response = {
         "answer": answer,
