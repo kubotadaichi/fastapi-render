@@ -19,5 +19,12 @@
         "url" : "https://youtu.be/mqFJIFMQLjs?si=vYsyTe8pGD_xJdjg&t=148",
         "description" : "FC大阪からのコーナーキックのシーンです。コーナーキックの説明に参考になります。",
         "start_time": 148
-    }
+    },
+    {
+        "title" : "ゴールシーン",
+        "id" : "4",
+        "url" : "https://youtu.be/_-7SvYBvFlc?si=QJCxK2J214IYpozG",
+        "description" : "ギラヴァンツ北九州がミドルシュートでゴールを決めたシーンです。試合のハイライトとして重要な場面です。",
+        "start_time": 41
+    }   
 ]
