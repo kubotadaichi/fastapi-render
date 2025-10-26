@@ -32,6 +32,12 @@ def read_root():
 def answer(req: AnswerRequest):
     text = req.text
     # Gemini APIを呼び出して回答を取得
+
+    dori_f = False
+    if "/dori" == text[0:5]:
+        text = text[5:]
+        dori_f = True
+
     answer, url, start_time, feeling_id = get_answer_from_gemini(text)
 
     speed = req.speed
@@ -40,12 +46,12 @@ def answer(req: AnswerRequest):
     print(f"Received request - actor: {actor}, speed: {speed}")
 
     # アクターに応じてmodel_idを設定
-    if actor == 'masumoto':
+    if actor == 'dori' or dori_f:
+        model_id = 'e143eae381414aeaa0f2a29dc8b5c9f2'
+    elif actor == 'masumoto':
         model_id = '7649fdd17d9344648375343b203120f5'
     elif actor == 'kubota':
         model_id = 'c906b79a1bd740f2897e4311eb58d203'
-    elif actor == 'dori':
-        model_id = 'e143eae381414aeaa0f2a29dc8b5c9f2'
     else:
         model_id = '7649fdd17d9344648375343b203120f5'  # デフォルト: masumoto
     
